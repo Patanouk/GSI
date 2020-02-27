@@ -32,6 +32,51 @@ public class BinaryTree<V> {
                 && isBalancedQuadratic(node.getRightNode());
     }
 
+    public String inOrder() {
+        StringBuilder stringBuilder = new StringBuilder();
+        inOrder(stringBuilder, root);
+        return stringBuilder.toString();
+    }
+
+    private void inOrder(StringBuilder stringBuilder, Node<V> node) {
+        if (node == null) {
+            return;
+        }
+        inOrder(stringBuilder, node.getLeftNode());
+        stringBuilder.append(node.getValue()).append(" ");
+        inOrder(stringBuilder, node.getRightNode());
+    }
+
+    public String preOrder() {
+        StringBuilder stringBuilder = new StringBuilder();
+        preOrder(stringBuilder, root);
+        return stringBuilder.toString();
+    }
+
+    private void preOrder(StringBuilder stringBuilder, Node<V> node) {
+        if (node == null) {
+            return;
+        }
+        stringBuilder.append(node.getValue()).append(" ");
+        preOrder(stringBuilder, node.getLeftNode());
+        preOrder(stringBuilder, node.getRightNode());
+    }
+
+    public String postOrder() {
+        StringBuilder stringBuilder = new StringBuilder();
+        postOrder(stringBuilder, root);
+        return stringBuilder.toString();
+    }
+
+    private void postOrder(StringBuilder stringBuilder, Node<V> node) {
+        if (node == null) {
+            return;
+        }
+        postOrder(stringBuilder, node.getLeftNode());
+        postOrder(stringBuilder, node.getRightNode());
+        stringBuilder.append(node.getValue()).append(" ");
+    }
+
     @Override
     public String toString() {
         return "BinaryTree{" +
