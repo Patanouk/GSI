@@ -31,4 +31,11 @@ public class BinaryTree<V> {
                 && isBalancedQuadratic(node.getLeftNode())
                 && isBalancedQuadratic(node.getRightNode());
     }
+
+    @Override
+    public String toString() {
+        return "BinaryTree{" +
+                "root=" + root +
+                '}';
+    }
 }
