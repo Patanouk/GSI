@@ -13,7 +13,12 @@ public class LRUCacheConstantTimeLinkedHashMap<K, V> implements Cache<K, V> {
 
     @Override
     public V get(K key) {
-        return cache.get(key);
+        V value = cache.get(key);
+        if (value != null) {
+            cache.remove(key);
+            cache.put(key, value);
+        }
+        return value;
     }
 
     @Override
