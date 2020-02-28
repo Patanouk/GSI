@@ -1,5 +1,8 @@
 package tree;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class BinaryTree<V> {
     private final Node<V> root;
 
@@ -100,6 +103,31 @@ public class BinaryTree<V> {
         postOrder(stringBuilder, node.getLeftNode());
         postOrder(stringBuilder, node.getRightNode());
         stringBuilder.append(node.getValue()).append(" ");
+    }
+
+    public String verticalOrder() {
+        StringBuilder stringBuilder = new StringBuilder();
+        Map<Integer, List<V>> verticalIndexToValues = new TreeMap<>();
+        getVerticalIndexToValues(root, verticalIndexToValues, 0);
+        for (List<V> values : verticalIndexToValues.values()) {
+            String printedValues = values.stream()
+                    .map(Objects::toString)
+                    .collect(Collectors.joining(" "));
+            stringBuilder.append(printedValues);
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    private void getVerticalIndexToValues(Node<V> node, Map<Integer, List<V>> verticalIndexToValues, int currentVerticalIndex) {
+        if (node == null) {
+            return;
+        }
+
+        List<V> currentValues = verticalIndexToValues.computeIfAbsent(currentVerticalIndex, index -> new ArrayList<>());
+        currentValues.add(node.getValue());
+        getVerticalIndexToValues(node.getLeftNode(), verticalIndexToValues, currentVerticalIndex - 1);
+        getVerticalIndexToValues(node.getRightNode(), verticalIndexToValues, currentVerticalIndex + 1);
     }
 
     @Override
