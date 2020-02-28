@@ -11,23 +11,29 @@ public class BinaryTreeTest {
     public void testIsBalanced() {
         BinaryTree<String> tree = new BinaryTree<>(null);
         assertTrue(tree.isBalancedQuadratic());
+        assertTrue(tree.isBalancedLinear());
 
         Node<String> root = new Node<>("1");
         BinaryTree<String> tree2 = new BinaryTree<>(root);
         assertTrue(tree2.isBalancedQuadratic());
+        assertTrue(tree2.isBalancedLinear());
 
         root.setLeftNode(new Node<>("1.1"));
         assertTrue(tree2.isBalancedQuadratic());
+        assertTrue(tree2.isBalancedLinear());
 
         root.setRightNode(new Node<>("1.2"));
         assertTrue(tree2.isBalancedQuadratic());
+        assertTrue(tree2.isBalancedLinear());
 
         root.getRightNode().setRightNode(new Node<>("1.2.2"));
         root.getRightNode().getRightNode().setLeftNode(new Node<>("1.2.2.2"));
         assertFalse(tree2.isBalancedQuadratic());
+        assertFalse(tree2.isBalancedLinear());
 
         root.getLeftNode().setLeftNode(new Node<>("1.1.1"));
         assertFalse(tree2.isBalancedQuadratic());
+        assertFalse(tree2.isBalancedLinear());
     }
 
     @Test
