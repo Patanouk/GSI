@@ -162,6 +162,37 @@ public class Strings {
         }
     }
 
+// ---------------------------------------------------------------------------------------------------------------------
+//  1.8 Zero matrix
+
+    private static int[][] zeroExpandRowColumn(int[][] matrix) {
+        Set<Integer> zeroRows = new HashSet<>();
+        Set<Integer> zeroColumns = new HashSet<>();
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 0) {
+                    zeroRows.add(i);
+                    zeroColumns.add(j);
+                }
+            }
+        }
+
+        for (Integer row : zeroRows) {
+            for (int j : matrix[row]) {
+                matrix[row][j] = 0;
+            }
+        }
+
+        for (Integer column : zeroColumns) {
+            //This assume a rectangular matrix
+            for (int i = 0; i < matrix.length; i++) {
+                matrix[i][column] = 0;
+            }
+        }
+        return matrix;
+    }
+
 //  -------------------------------------------
 
     public static void main(String[] args) {
