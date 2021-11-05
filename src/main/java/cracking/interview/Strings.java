@@ -6,10 +6,6 @@ import java.util.Set;
 
 public class Strings {
 
-    public static void main(String[] args) {
-        System.out.println(areLessThanOneEditAway("ad", "abc"));
-    }
-
 // ---------------------------------------------------------------------------------------------------------------------
 //  1.1 Implement an algorithm to determine if a string has all unique characters. What if you
     //cannot use additional data structures?
@@ -131,5 +127,44 @@ public class Strings {
             }
         }
         return true;
+    }
+
+// ---------------------------------------------------------------------------------------------------------------------
+//  1.6 String compression
+    private static String stringCompression(String input) {
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            int charCount = 1;
+
+            while (i + 1 < input.length() && input.charAt(i) == c) {
+                if (input.charAt(i) == input.charAt(i + 1)) {
+                    charCount++;
+                    i++;
+                } else {
+                    break;
+                }
+            }
+
+            stringBuilder.append(c);
+            stringBuilder.append(charCount);
+        }
+
+        if (stringBuilder.length() > input.length()) {
+            return input;
+        } else {
+            return stringBuilder.toString();
+        }
+    }
+
+//  -------------------------------------------
+
+    public static void main(String[] args) {
+        System.out.println(stringCompression("aabcccccaaa"));
     }
 }
