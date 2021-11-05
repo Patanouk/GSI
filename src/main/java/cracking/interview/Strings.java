@@ -7,11 +7,11 @@ import java.util.Set;
 public class Strings {
 
     public static void main(String[] args) {
-        System.out.println(hasUniqueCharsNoAdditionalsDataStructure("abz"));
-        System.out.println(replaceWhitespaces(" a a "));
+        System.out.println(isPalindromePermutation("tactcoapapa"));
     }
 
-    //1.1 Implement an algorithm to determine if a string has all unique characters. What if you
+// ---------------------------------------------------------------------------------------------------------------------
+//  1.1 Implement an algorithm to determine if a string has all unique characters. What if you
     //cannot use additional data structures?
 
     //This is O(n)
@@ -42,8 +42,26 @@ public class Strings {
         return true;
     }
 
-    //1.3 URLify
+// ---------------------------------------------------------------------------------------------------------------------
+//  1.3 URLify
     public static String replaceWhitespaces(String input) {
         return input.replace(" ", "%20");
+    }
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+//  1.4 Palindrome Permutation
+    public static boolean isPalindromePermutation(String input) {
+        Set<Character> characters = new HashSet<>();
+
+        for (char c : input.toCharArray()) {
+            if (!characters.contains(c)) {
+                characters.add(c);
+            } else {
+                characters.remove(c);
+            }
+        }
+
+        return characters.size() <= 1;
     }
 }
