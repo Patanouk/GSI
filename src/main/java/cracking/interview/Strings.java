@@ -7,7 +7,7 @@ import java.util.Set;
 public class Strings {
 
     public static void main(String[] args) {
-        System.out.println(isPalindromePermutation("tactcoapapa"));
+        System.out.println(areLessThanOneEditAway("ad", "abc"));
     }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -63,5 +63,73 @@ public class Strings {
         }
 
         return characters.size() <= 1;
+    }
+
+// ---------------------------------------------------------------------------------------------------------------------
+//  1.5 One Away
+
+    public static boolean areLessThanOneEditAway(String s1, String s2) {
+        if (s1.equals(s2)) {
+            return true;
+        }
+
+        if (Math.abs(s1.length() - s2.length()) > 1) {
+            return false;
+        }
+
+        if (s1.length() == s2.length()) {
+            return areOneReplaceAway(s1, s2);
+        } else if (s1.length() > s2.length()) {
+            return areOneInsertAway(s1, s2);
+        } else {
+            return areOneInsertAway(s2, s1);
+        }
+    }
+
+    //Insert and Replace are basically the same
+    //Can we insert one char in s2 to make it equal to s1
+    private static boolean areOneInsertAway(String s1, String s2) {
+        if (s2.length() >= s1.length()) {
+            return false;
+        }
+
+        int index1 = 0;
+        int index2 = 0;
+        int numInsert = 0;
+
+        while (index2 < s2.length() && index1 < s1.length()) {
+            if (s1.charAt(index1) != s2.charAt(index2)) {
+                index1++;
+                numInsert++;
+                if (numInsert > 1) {
+                    return false;
+                }
+
+            } else {
+                index1++;
+                index2++;
+            }
+        }
+        return true;
+    }
+
+    //This assume both string have the same length
+    private static boolean areOneReplaceAway(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+
+        int numDifferences = 0;
+        for (int i = 0; i < s1.length(); i++) {
+            if (s1.charAt(i) == s2.charAt(i)) {
+                continue;
+            }
+
+            numDifferences++;
+            if (numDifferences > 1) {
+                return false;
+            }
+        }
+        return true;
     }
 }
