@@ -8,6 +8,7 @@ public class Strings {
 
     public static void main(String[] args) {
         System.out.println(hasUniqueCharsNoAdditionalsDataStructure("abz"));
+        System.out.println(replaceWhitespaces(" a a "));
     }
 
     //1.1 Implement an algorithm to determine if a string has all unique characters. What if you
@@ -39,5 +40,10 @@ public class Strings {
             bitSet.set(bit);
         }
         return true;
+    }
+
+    //1.3 URLify
+    public static String replaceWhitespaces(String input) {
+        return input.replace(" ", "%20");
     }
 }
